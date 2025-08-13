@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "dev": "vite",
+    "build": "vite build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -11,5 +13,9 @@
   "description": "",
   "devDependencies": {
     "vite": "^7.1.2"
+  },
+  "dependencies": {
+    "gsap": "^3.13.0",
+    "three": "^0.179.1"
   }
 }
