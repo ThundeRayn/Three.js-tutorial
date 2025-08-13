@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import './style.css';
+import gsap from "gsap";
 import { OrbitControls } from 'three/examples/jsm/Addons.js';
 
 // Scene
@@ -79,3 +80,9 @@ const loop = () =>{
     window.requestAnimationFrame(loop);
 }
 loop();
+
+//timeline magic!
+const t1 = gsap.timeline({defaults: {duration:1}});
+t1.fromTo(sphere.scale, {z:0,x:0,y:0},{z:1,x:1,y:1}); //sphere pushing it animation
+t1.fromTo("header",{y:'-100%'}, {y:"0%"}); //header coming down
+t1.fromTo("title",{opacity:0},{opacity:1}); //title showing up

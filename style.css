@@ -47,6 +47,7 @@ p, h1, h2, h3, h4, h5, h6, li {
     z-index:2;
     padding-top:23vh;
     text-align: center;
+    user-select: none;
 }
 
 #navbar{
@@ -66,11 +67,12 @@ p, h1, h2, h3, h4, h5, h6, li {
 
 }
 
-#navbar li{
-    font-weight:bold;
+#navbar li { 
+    font-weight: bold;
     user-select: auto;
+    transition: transform 0.3s; 
 }
 
-#navbar li:hover{
-    text-shadow:0 0 4px white;
+#navbar li:hover {
+    transform: scale(1.1); 
 }
