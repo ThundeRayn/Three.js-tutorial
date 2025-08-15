@@ -29,6 +29,7 @@ p, h1, h2, h3, h4, h5, h6, li {
     justify-content: space-between;
     align-items: center;
     padding:20px;
+    width: 100%;
 }
 #header p{
     font-weight:bold;
@@ -40,6 +41,7 @@ p, h1, h2, h3, h4, h5, h6, li {
     height:1rem;
     width:2rem;
     border-radius:50%;
+    flex-shrink: 0;
 }
 
 #title{
@@ -52,27 +54,27 @@ p, h1, h2, h3, h4, h5, h6, li {
 
 #navbar{
     background-color:rgba(143, 143, 143,0.4);
-    border-radius: 20vw;
+    border-radius: 20px;
     box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.1);
     position:relative;
     z-index:2;
     font-size:medium;
-    padding:20px;
+    display:block;
+    padding:20px 0px;
     user-select: none;
     display:flex;
-    gap:44px;
-    margin:40vh 24vw 2vw 24vw;
     align-items: center;
     justify-content: center;
-
+    gap:44px; 
+    margin: 200px 20vw 0px 20vw;
+    transition: top 0.5s;
 }
 
-#navbar li { 
+ #navbar li { 
     font-weight: bold;
     user-select: auto;
     transition: transform 0.3s; 
-}
-
+} 
 #navbar li:hover {
     transform: scale(1.1); 
-}
+} 

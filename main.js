@@ -9,7 +9,8 @@ const scene = new THREE.Scene();
 //create sphere
 const geometry = new THREE.SphereGeometry(3, 64, 64);
 const material = new THREE.MeshStandardMaterial({ 
-    color: '#ffffffff'
+    color: '#ffffffff',
+    roughness: 0.5, //optional, for better lighting effect
 });
 const sphere = new THREE.Mesh(geometry, material);
 scene.add(sphere);
@@ -22,7 +23,7 @@ const sizes = {
 
 //light
 const light = new THREE.PointLight(0xffffff, 50, 50, 2);
-light.position.set(7, 7, 7); //light.position.set(x, y, z)
+light.position.set(5, 5, 3); //light.position.set(x, y, z)
 scene.add(light);
 // ambientLight
 const ambientLight = new THREE.AmbientLight(0xfff0f0, 0.1);
@@ -82,7 +83,30 @@ const loop = () =>{
 loop();
 
 //timeline magic!
-const t1 = gsap.timeline({defaults: {duration:1}});
-t1.fromTo(sphere.scale, {z:0,x:0,y:0},{z:1,x:1,y:1}); //sphere pushing it animation
-t1.fromTo("header",{y:'-100%'}, {y:"0%"}); //header coming down
-t1.fromTo("title",{opacity:0},{opacity:1}); //title showing up
+const t1 = gsap.timeline({defaults: {duration:.5}});
+t1.fromTo(sphere.scale, {z:0,x:0,y:0},{z:1,x:1,y:1}) //sphere pushing it animation
+  .fromTo("#title",{opacity:0},{opacity:1}, "<") //title showing up 
+  .fromTo("#header",{y:'-100%'}, {y:"0%"}) //header coming down
+    .fromTo("#navbar",{opacity:0}, {opacity:1}, "<")
+    .fromTo("#navbar",{y:'-100%'}, {y:"0%"}, "<"); //buttons coming up (use transform: translateY)
+
+//Mouse Animation Collor!
+let mouseDown = false;
+let rgb = [];
+window.addEventListener('mousedown', () => {mouseDown = true});
+window.addEventListener('mouseup', () => {mouseDown = false});
+
+window.addEventListener('mousemove', (e) => {
+    if(mouseDown) {
+        //color change
+        rgb = [
+            Math.round((e.pageX / sizes.width) * 255),
+            Math.round((e.pageY / sizes.height) * 255),
+            150
+        ];
+        //console.log(rgb);
+        // Animation here
+        let newColor = new THREE.Color(`rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`);
+        gsap.to(sphere.material.color, {r: newColor.r, g: newColor.g, b: newColor.b});
+    }
+});
